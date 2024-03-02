@@ -1,0 +1,5 @@
+function createOrUpdateUser(){var e=document.getElementById("name"),t=document.getElementById("email");const n=Date.now().toString();var a={id:n,name:e.value,email:t.value},r=JSON.parse(localStorage.getItem("users"))||[],s=r.findIndex(e=>e.id===n);-1!==s?r[s]=a:r.push(a),localStorage.setItem("users",JSON.stringify(r)),e.value="",t.value="",displayUsers()}function deleteUser(t){var e=(JSON.parse(localStorage.getItem("users"))||[]).filter(e=>e.id!==t);localStorage.setItem("users",JSON.stringify(e)),displayUsers()}function displayUsers(){const n=document.getElementById("userList");var e=JSON.parse(localStorage.getItem("users"))||[];n.innerHTML="",e.forEach(e=>{var t=document.createElement("li");t.innerHTML=`
+      <strong>${e.name}</strong> (${e.email})
+      <button onclick="editUser('${e.id}')">Edit</button>
+      <button onclick="deleteUser('${e.id}')">Delete</button>
+    `,n.appendChild(t)})}function editUser(t){var e=(JSON.parse(localStorage.getItem("users"))||[]).find(e=>e.id===t);e&&(document.getElementById("name").value=e.name,document.getElementById("email").value=e.email)}document.addEventListener("DOMContentLoaded",()=>{displayUsers()});
